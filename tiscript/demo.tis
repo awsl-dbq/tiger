@@ -1,0 +1,58 @@
+package   wo.le.ge.ca.ca.ca;
+let map = fn(arr, f) {
+    let iter = fn(arr, acc) {
+        if (len(arr) == 0) {
+            acc
+        }else {
+             iter(rest(arr), push(acc, f(first(arr))));
+        }
+    };
+    iter(arr, []);
+};
+
+
+let a = [0,1, 2, 3, 4,5,6,7,8];
+
+println("y=",(1+2),"x+2");
+let y= fn(x){ x*3+2};
+map(a,y);
+
+make function add(a Integer ,b Integer) Integer {
+    a+b
+};
+add(1,2);
+
+let addfuc = fn(a,b){a+b};
+
+make function fac(a Integer) Integer {
+    if (a < 2 ) { 
+        a
+    }else {
+       fac(a-1)+fac(a-2);
+    }
+};
+
+println(map(a,fac));
+
+let unless = macro(condition, consequence, alternative){ 
+    quote(
+        if (!(unquote(condition))) {
+            unquote(consequence); 
+        } else {
+            unquote(alternative); 
+        }); 
+};
+
+unless(10 > 5, println("not greater"), println("greater"));
+
+
+let reduce = fn(f,arr,init){
+    if(len(arr) == 0){
+        init
+    }else{
+        reduce(f,rest(arr),f(init,first(arr)));
+    }
+};
+
+println(reduce(addfuc,a,0));
+
