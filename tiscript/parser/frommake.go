@@ -5,44 +5,7 @@ import (
 	"github.com/awsl-dbq/tiger/tiscript/token"
 )
 
-/**
-from Graph([Page],[referTo])  g
-make function  PageRank()  {
-    print(g)
-}
-------------
-from Graph([Page],[referTo]  g
-make function  ShortestPath(sourePage Page ,endPage Page)
-Path([Page]){
-    print(g)
-}
-**/
-func (p *Parser) parseFromGraphLiteral() ast.Expression {
-	fm := &ast.FromGraphLiteral{
-		Token: p.curToken,
-	}
-	if !(p.peekTokenIs(token.IDENT) && p.peekToken.Literal == "Graph") {
-		p.addError("need from Graph, but got ...")
-		return nil
-	}
-	p.nextToken()
-	if !p.expectPeek(token.LPAREN) { //(
-		return nil
-	}
-	fm.NodeTypes = p.parseFromGraphNodeTypes()
-	fm.EdgeTypes = p.parseFromGraphEdgeTypes()
-	if !p.expectPeek(token.RPAREN) { //)
-		return nil
-	}
-	if !p.expectPeek(token.IDENT) { //as
-		return nil
-	}
-	fm.As = &ast.AsExpression{
-		Literal: p.curToken.Literal,
-		Tokens:  []token.Token{p.curToken},
-	}
-	return fm
-}
+
 
 func (p *Parser) parseIdentifierArrays() []*ast.Identifier {
 	nts := []*ast.Identifier{}

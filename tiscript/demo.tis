@@ -15,7 +15,7 @@ let a = [0,1, 2, 3, 4,5,6,7,8];
 
 println("y=",(1+2),"x+2");
 let y= fn(x){ x*3+2};
-map(a,y);
+println(map(a,y));
 
 make function add(a Integer ,b Integer) Integer {
     a+b
