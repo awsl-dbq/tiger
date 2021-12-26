@@ -27,6 +27,7 @@ const (
 type Object interface {
 	Type() ObjectType
 	Inspect() string
+	ToBytesArray() []byte
 }
 
 type Integer struct {
@@ -36,6 +37,9 @@ type Integer struct {
 func (i *Integer) Type() ObjectType { return INTEGER_OBJ }
 func (i *Integer) Inspect() string {
 	return fmt.Sprintf("%d", i.Value)
+}
+func (i *Integer) ToBytesArray() []byte {
+	return []byte{}
 }
 
 type Boolean struct {
@@ -47,6 +51,9 @@ func (i *Boolean) Type() ObjectType { return BOOLEAN_OBJ }
 func (i *Boolean) Inspect() string {
 	return fmt.Sprintf("%t", i.Value)
 }
+func (i *Boolean) ToBytesArray() []byte {
+	return []byte{}
+}
 
 type NULL struct {
 }
@@ -55,6 +62,9 @@ func (i *NULL) Type() ObjectType { return NULL_OBJ }
 
 func (i *NULL) Inspect() string {
 	return "null"
+}
+func (i *NULL) ToBytesArray() []byte {
+	return []byte{}
 }
 
 type ReturnValue struct {
@@ -66,6 +76,9 @@ func (i *ReturnValue) Type() ObjectType { return RETURN_VALUE_OBJ }
 func (i *ReturnValue) Inspect() string {
 	return i.Value.Inspect()
 }
+func (i *ReturnValue) ToBytesArray() []byte {
+	return []byte{}
+}
 
 type Error struct {
 	Message string
@@ -73,6 +86,9 @@ type Error struct {
 
 func (e *Error) Type() ObjectType { return ERROR_OBJ }
 func (e *Error) Inspect() string  { return "ERROR: " + e.Message }
+func (i *Error) ToBytesArray() []byte {
+	return []byte{}
+}
 
 type Function struct {
 	Parameters []*ast.Identifier
@@ -80,6 +96,9 @@ type Function struct {
 	Env        *Environment
 }
 
+func FromBytesArray(input []byte) Object {
+	return nil
+}
 func (f *Function) Type() ObjectType { return FUNCTION_OBJ }
 
 func (f *Function) Inspect() string {
@@ -96,6 +115,9 @@ func (f *Function) Inspect() string {
 	out.WriteString("\n}")
 	return out.String()
 }
+func (i *Function) ToBytesArray() []byte {
+	return []byte{}
+}
 
 type String struct {
 	Value string
@@ -103,6 +125,9 @@ type String struct {
 
 func (s *String) Type() ObjectType { return STRING_OBJ }
 func (s *String) Inspect() string  { return s.Value }
+func (i *String) ToBytesArray() []byte {
+	return []byte{}
+}
 
 /**
  build -in
@@ -114,6 +139,9 @@ type Builtin struct {
 
 func (b *Builtin) Type() ObjectType { return BUILTIN_OBJ }
 func (b *Builtin) Inspect() string  { return "builtin function" }
+func (i *Builtin) ToBytesArray() []byte {
+	return []byte{}
+}
 
 type Array struct {
 	Elements []Object
@@ -131,6 +159,9 @@ func (ao *Array) Inspect() string {
 	out.WriteString("]")
 	return out.String()
 }
+func (i *Array) ToBytesArray() []byte {
+	return []byte{}
+}
 
 type Quote struct {
 	Node ast.Node
@@ -140,11 +171,18 @@ func (q *Quote) Type() ObjectType { return QUOTE_OBJ }
 func (q *Quote) Inspect() string {
 	return "QUOTE(" + q.Node.String() + ")"
 }
+func (i *Quote) ToBytesArray() []byte {
+	return []byte{}
+}
 
 type Macro struct {
 	Parameters []*ast.Identifier
 	Body       *ast.BlockStatement
 	Env        *Environment
+}
+
+func (i *Macro) ToBytesArray() []byte {
+	return []byte{}
 }
 
 func (m *Macro) Type() ObjectType { return MACRO_OBJ }
