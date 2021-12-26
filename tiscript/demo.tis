@@ -21,8 +21,6 @@ let range = fn(start,end){
     iter([],start,end);
 };
 
-
-
 let filter = fn(pred,arr){
     let match = fn(f,e,arr){
     if(f(e)){
@@ -52,23 +50,20 @@ println("y=",(1+2),"x+2");
 let y= fn(x){ x*3+2};
 println(map(seed,y));
 
-make function add(a Integer ,b Integer) Integer {
-    a+b
-};
-add(1,2);
 
-let addfuc = fn(a,b){a+b};
+let add = fn(a,b){a+b};
 
-make function fac(a Integer) Integer {
-    if (a < 2 ) { 
-        a
+make function fac(input Integer) Integer {
+    if (input < 2 ) { 
+        input
     }else {
-       fac(a-1)+fac(a-2);
+       fac(input-1)+fac(input-2);
     }
 };
 
+let ten = range(1,10);
 
-println(map(range(1,10),fac));
+println(map(ten,fac));
 
 let unless = macro(condition, consequence, alternative){ 
     quote(
@@ -92,5 +87,5 @@ let reduce = fn(f,arr,init){
     }
 };
 
-println(reduce(addfuc,seed,0));
+println(reduce(add,seed,0));
 
