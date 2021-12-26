@@ -20,8 +20,7 @@ type MakeLiteral struct {
 	Return ReturnObject
 }
 
-
-func (node *MakeLiteral) expressionNode() {}
+func (node *MakeLiteral) ExpressionNode() {}
 func (node *MakeLiteral) TokenLiteral() string {
 	return node.Token.Literal
 }

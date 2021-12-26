@@ -59,11 +59,11 @@ func FromBytesArray(input []byte) Object {
 	case byte(0x11):
 		obj = &Macro{}
 	}
+
 	err := json.Unmarshal(bs, &obj)
 	if err != nil {
 		panic(err)
 	}
-	fmt.Println(obj.Inspect())
 	return obj
 }
 
@@ -135,14 +135,7 @@ func (i *ReturnValue) Inspect() string {
 	return i.Value.Inspect()
 }
 func (i *ReturnValue) ToBytesArray() []byte {
-	bs, err := json.Marshal(i)
-	if err != nil {
-		panic(err)
-	}
-	ret := make([]byte, 1, 1+len(bs))
-	ret[0] = byte(0x04)
-	ret = append(ret, bs...)
-	return ret
+	return []byte{0x00} // 不方便序列化
 }
 
 type Error struct {
@@ -185,14 +178,7 @@ func (f *Function) Inspect() string {
 	return out.String()
 }
 func (i *Function) ToBytesArray() []byte {
-	bs, err := json.Marshal(i)
-	if err != nil {
-		panic(err)
-	}
-	ret := make([]byte, 1, 1+len(bs))
-	ret[0] = byte(0x06)
-	ret = append(ret, bs...)
-	return ret
+	return []byte{0x00} // 不方便序列化
 }
 
 type String struct {
@@ -202,14 +188,15 @@ type String struct {
 func (s *String) Type() ObjectType { return STRING_OBJ }
 func (s *String) Inspect() string  { return s.Value }
 func (i *String) ToBytesArray() []byte {
-	bs, err := json.Marshal(i)
-	if err != nil {
-		panic(err)
-	}
-	ret := make([]byte, 1, 1+len(bs))
-	ret[0] = byte(0x07)
-	ret = append(ret, bs...)
-	return ret
+	// bs, err := json.Marshal(i)
+	// if err != nil {
+	// 	panic(err)
+	// }
+	// ret := make([]byte, 1, 1+len(bs))
+	// ret[0] = byte(0x07)
+	// ret = append(ret, bs...)
+	// return ret
+	return []byte{0x00} // 不方便序列化
 }
 
 /**
@@ -223,14 +210,7 @@ type Builtin struct {
 func (b *Builtin) Type() ObjectType { return BUILTIN_OBJ }
 func (b *Builtin) Inspect() string  { return "builtin function" }
 func (i *Builtin) ToBytesArray() []byte {
-	bs, err := json.Marshal(i)
-	if err != nil {
-		panic(err)
-	}
-	ret := make([]byte, 1, 1+len(bs))
-	ret[0] = byte(0x08)
-	ret = append(ret, bs...)
-	return ret
+	return []byte{0x00} // 不方便序列化
 }
 
 type Array struct {
@@ -250,14 +230,7 @@ func (ao *Array) Inspect() string {
 	return out.String()
 }
 func (i *Array) ToBytesArray() []byte {
-	bs, err := json.Marshal(i)
-	if err != nil {
-		panic(err)
-	}
-	ret := make([]byte, 1, 1+len(bs))
-	ret[0] = byte(0x09)
-	ret = append(ret, bs...)
-	return ret
+	return []byte{0x00} // 不方便序列化
 }
 
 type Quote struct {
@@ -269,14 +242,7 @@ func (q *Quote) Inspect() string {
 	return "QUOTE(" + q.Node.String() + ")"
 }
 func (i *Quote) ToBytesArray() []byte {
-	bs, err := json.Marshal(i)
-	if err != nil {
-		panic(err)
-	}
-	ret := make([]byte, 1, 1+len(bs))
-	ret[0] = byte(0x10)
-	ret = append(ret, bs...)
-	return ret
+	return []byte{0x00} // 不方便序列化
 }
 
 type Macro struct {
@@ -286,14 +252,7 @@ type Macro struct {
 }
 
 func (i *Macro) ToBytesArray() []byte {
-	bs, err := json.Marshal(i)
-	if err != nil {
-		panic(err)
-	}
-	ret := make([]byte, 1, 1+len(bs))
-	ret[0] = byte(0x11)
-	ret = append(ret, bs...)
-	return ret
+	return []byte{0x00} // 不方便序列化
 }
 
 func (m *Macro) Type() ObjectType { return MACRO_OBJ }

@@ -311,6 +311,7 @@ func applyFunction(fn object.Object, args []object.Object) object.Object {
 	case *object.Builtin:
 		return fn.Fn(args...)
 	default:
+		fmt.Println(fn)
 		return newError("not a function: %s", fn)
 	}
 }
