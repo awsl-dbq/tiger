@@ -10,28 +10,17 @@ import (
 	"github.com/tikv/client-go/v2/config"
 	"github.com/tikv/client-go/v2/rawkv"
 	"go.uber.org/zap"
-	"go.uber.org/zap/zapcore"
 )
 
 func init() {
-	beQuite()
+	beQuiet()
 }
-func beQuite() {
-	encoderCfg := zapcore.EncoderConfig{
-		MessageKey:     "msg",
-		LevelKey:       "level",
-		NameKey:        "logger",
-		EncodeLevel:    zapcore.LowercaseLevelEncoder,
-		EncodeTime:     zapcore.ISO8601TimeEncoder,
-		EncodeDuration: zapcore.StringDurationEncoder,
-	}
-	core := zapcore.NewCore(zapcore.NewJSONEncoder(encoderCfg), os.Stdout, zap.ErrorLevel)
-	logger := zap.New(core)
+func beQuiet() {
+	logger := zap.NewNop()
 	defer logger.Sync()
 
 	log.ReplaceGlobals(logger, nil)
 	log.Info("you should not see this line.")
-
 }
 func useMem() bool {
 	env := os.Environ()
@@ -56,7 +45,7 @@ func NewEnvironment() *Environment {
 		cli.Close()
 	}
 	s := make(map[string]Object)
-	ns := uuid.New()
+	ns := "tiscript-" + uuid.New()
 	return &Environment{
 		Namespace: ns,
 		store:     s,
