@@ -4,18 +4,53 @@ let map = fn(arr, f) {
         if (len(arr) == 0) {
             acc
         }else {
-             iter(rest(arr), push(acc, f(first(arr))));
+            iter(rest(arr), push(acc, f(first(arr))));
         }
     };
     iter(arr, []);
 };
 
+let range = fn(start,end){
+    let iter = fn(acc, current,target) {
+        if (current == target) {
+            acc
+        }else {
+             iter(push(acc, current),current + 1,target);
+        }
+    };
+    iter([],start,end);
+};
 
-let a = [0,1, 2, 3, 4,5,6,7,8];
+
+
+let filter = fn(pred,arr){
+    let match = fn(f,e,arr){
+    if(f(e)){
+        push(arr,e);
+    }else{
+        arr
+    }
+    };
+    let iter = fn(arr,acc) {
+        if (len(arr)==0) {
+            acc
+        }else {
+            iter(rest(arr),match(pred,first(arr),acc));
+        }
+    };
+    iter(arr,[])
+};
+
+let seed = range(1,50);
+let bigThanFive = fn(x){x > 5};
+
+println("numbers bigger than five");
+
+println(filter(bigThanFive,seed));
 
 println("y=",(1+2),"x+2");
 let y= fn(x){ x*3+2};
-println(map(a,y));
+println(map(seed,y));
 
 make function add(a Integer ,b Integer) Integer {
     a+b
@@ -32,7 +67,8 @@ make function fac(a Integer) Integer {
     }
 };
 
-println(map(a,fac));
+
+println(map(range(1,10),fac));
 
 let unless = macro(condition, consequence, alternative){ 
     quote(
@@ -43,7 +79,9 @@ let unless = macro(condition, consequence, alternative){
         }); 
 };
 
-unless(10 > 5, println("not greater"), println("greater"));
+unless(10 > 5, 
+    println("not greater"), 
+    println("greater"));
 
 
 let reduce = fn(f,arr,init){
@@ -54,5 +92,5 @@ let reduce = fn(f,arr,init){
     }
 };
 
-println(reduce(addfuc,a,0));
+println(reduce(addfuc,seed,0));
 
