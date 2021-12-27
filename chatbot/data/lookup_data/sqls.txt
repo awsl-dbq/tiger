@@ -1,0 +1,6 @@
+select 1
+select version()
+select
+update
+delete
+select id from db

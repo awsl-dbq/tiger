@@ -28,3 +28,36 @@ stories:
   - action: utter_did_that_help
   - intent: deny
   - action: utter_goodbye
+
+- story: explain path
+  steps:
+  - intent: explain_sql
+  - action: action_do_explain
+
+
+- story: show db path
+  steps:
+  - intent: show_databases
+  - action: action_show_databases
+
+- story: show table path
+  steps:
+  - intent: show_tables
+  - action: action_show_tables
+
+- story: show status path
+  steps:
+  - intent: show_status
+  - action: action_show_status
+
+- story: show processlist path
+  steps:
+  - intent: show_processlist
+  - action: action_show_processlist
+
+
+- story: run sql path
+  steps:
+  - intent: run_sql
+  - action: action_run_sql
+ 

@@ -1,5 +1,4 @@
 version: "2.0"
-
 nlu:
 - intent: greet
   examples: |
@@ -16,7 +15,6 @@ nlu:
     - goodmorning
     - goodevening
     - good afternoon
-
 - intent: goodbye
   examples: |
     - good afternoon
@@ -30,7 +28,6 @@ nlu:
     - see you around
     - bye bye
     - see you later
-
 - intent: affirm
   examples: |
     - yes
@@ -39,7 +36,6 @@ nlu:
     - of course
     - that sounds good
     - correct
-
 - intent: deny
   examples: |
     - no
@@ -49,7 +45,6 @@ nlu:
     - don't like that
     - no way
     - not really
-
 - intent: mood_great
   examples: |
     - perfect
@@ -66,7 +61,6 @@ nlu:
     - so so perfect
     - so good
     - so perfect
-
 - intent: mood_unhappy
   examples: |
     - my day was horrible
@@ -83,10 +77,53 @@ nlu:
     - extremly sad
     - so saad
     - so sad
-
 - intent: bot_challenge
   examples: |
     - are you a bot?
-    - are you a human?
+    - are you a human?加
     - am I talking to a bot?
     - am I talking to a human?
+- intent: explain_sql
+  examples: |
+    - 解释解释[update tab set b=c](sql)
+    - 解释一下[select a,b,c from d ](sql)
+    - [select * from a ](sql)什么意思
+    - explain [select 1](sql)
+    - explain [select 1 from b](sql)
+    - explain [select 1 from b where c=1](sql)
+    - explain [select 1 from c where d=1 and h=2 and c in ](sql)
+- intent: show_databases
+  examples: |
+    - show databases
+    - 几个库
+    - show database
+    - show datab
+    - show datas
+    - 有哪些库呢
+- intent: show_tables
+  examples: |
+    - show tables
+    - 哪些表
+    - 有哪些表
+    - 几张表
+    - 几个表呢
+- intent: show_processlist
+  examples: |
+    - show processlist
+    - 几个进程
+    - 有哪些进程呢
+- intent: show_status
+  examples: |
+    - 最近咋样
+    - how do you do
+    - 啥状态啊你
+    - 状态怎么样
+- intent: run_sql
+  examples: |
+    - [select 1](sql) 看看
+    - [select version()](sql) 试试
+    - 跑一下 [select count](sql)
+    - [select version() ](sql)[select version() ](sql)[select version() ](sql)看看
+- regex: sql
+  examples: |
+    - /select*
