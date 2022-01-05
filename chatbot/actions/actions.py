@@ -11,6 +11,8 @@ from typing import Any, Text, Dict, List
 #
 from rasa_sdk import Action, Tracker
 from rasa_sdk.executor import CollectingDispatcher
+import random
+import math
 import os
 # poor man's mysql client
 mysql_client = """mysql -uroot -p0000 -s -h127.0.0.1 mysql -e "{}" """
@@ -20,7 +22,17 @@ def run_sql(cmd):
     if os.environ.get('usetidb') != "":
         return "".join(os.popen(local_tidb_client.format(cmd)).readlines())
     return "".join(os.popen(mysql_client.format(cmd)).readlines())
+def randomPickGifUrl():
+    seed = [
+        "https://n.sinaimg.cn/tech/transform/340/w162h178/20210629/aed8-krwipar9961537.gif",
+        "https://n.sinaimg.cn/tech/transform/279/w136h143/20210629/bb5f-krwipar9958933.gif",
+    ]
+    idx = math.floor(random.random()*10000) % len(seed)
+    return seed[idx]
 
+def randomPickGif(dispatcher):
+    imgurl = randomPickGifUrl()
+    dispatcher.utter_message(image=imgurl)
 class ActionHelloWorld(Action):
 
     def name(self) -> Text:
@@ -31,7 +43,7 @@ class ActionHelloWorld(Action):
             domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
 
         dispatcher.utter_message(text="Hello World!")
-
+        randomPickGif(dispatcher)
         return []
     
 class ActionShowDatabases(Action):
@@ -42,8 +54,8 @@ class ActionShowDatabases(Action):
             tracker: Tracker,
             domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
 
-        dispatcher.utter_message(text=run_sql("show databases"))
-
+        dispatcher.utter_message(text="我有"+"  ".join(run_sql("show databases").lower().split("\n")[1:])+"这几个库呢.")
+        randomPickGif(dispatcher)
         return []
     
 class ActionShowTables(Action):
@@ -54,8 +66,8 @@ class ActionShowTables(Action):
             tracker: Tracker,
             domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
 
-        dispatcher.utter_message(text=run_sql("show tables"))
-
+        dispatcher.utter_message(text="我有"+" ".join(run_sql("show tables").lower().split("\n")[1:]) + "这些表呢")
+        randomPickGif(dispatcher)
         return []
     
 class ActionShowStatus(Action):
@@ -68,7 +80,7 @@ class ActionShowStatus(Action):
         cmd = "status"
         rep = run_sql(cmd)
         dispatcher.utter_message(text=rep)
-
+        randomPickGif(dispatcher)
         return []
     
 class ActionExplain(Action):
@@ -83,7 +95,7 @@ class ActionExplain(Action):
         cmd = "explain {}".format(tracker.get_slot("sql"))
         rep = run_sql(cmd)
         dispatcher.utter_message(text=rep)
-
+        randomPickGif(dispatcher)
         return []
 
 
@@ -99,6 +111,7 @@ class ActionRunSql(Action):
         cmd = "{}".format(tracker.get_slot("sql"))
         rep = run_sql(cmd)
         dispatcher.utter_message(text=rep)
+        randomPickGif(dispatcher)
         return []
 
     
@@ -111,5 +124,17 @@ class ActionShowProcesslist(Action):
             domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
 
         dispatcher.utter_message(text=run_sql("show processlist"))
+        randomPickGif(dispatcher)
         return []
 
+class ShowConnection(Action):
+    def name(self) -> Text:
+        return "action_show_connection"
+
+    def run(self,dispatcher: CollectingDispatcher,tracker: Tracker,
+        domain: Dict[Text,Any]
+    ) -> List[Dict[Text,Any]]:
+        cmd = "select * from METRICS_SCHEMA.tidb_connection_count;"
+        rep = run_sql(cmd)
+        dispatcher.utter_message(text=rep)
+        randomPickGif(dispatcher)

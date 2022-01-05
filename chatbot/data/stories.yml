@@ -61,3 +61,7 @@ stories:
   - intent: run_sql
   - action: action_run_sql
  
+- story: get_started
+  steps:
+  - intent: get_started
+  - action: utter_get_started

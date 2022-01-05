@@ -15,6 +15,10 @@ nlu:
     - goodmorning
     - goodevening
     - good afternoon
+    - 你好
+    - 哈哈
+    - 嘿
+    - 在吗
 - intent: goodbye
   examples: |
     - good afternoon
@@ -28,6 +32,9 @@ nlu:
     - see you around
     - bye bye
     - see you later
+    - 再见
+    - 回见哦
+    - 下次再聊
 - intent: affirm
   examples: |
     - yes
@@ -36,6 +43,7 @@ nlu:
     - of course
     - that sounds good
     - correct
+    - 是的
 - intent: deny
   examples: |
     - no
@@ -45,9 +53,13 @@ nlu:
     - don't like that
     - no way
     - not really
+    - 不是
 - intent: mood_great
   examples: |
     - perfect
+    - 好
+    - 好棒
+    - 干的漂亮
     - great
     - amazing
     - feeling like a king
@@ -64,6 +76,12 @@ nlu:
 - intent: mood_unhappy
   examples: |
     - my day was horrible
+    - 不开心
+    - 香菇蓝瘦
+    - 想哭
+    - 生气
+    - 不高兴
+    - 气气
     - I am sad
     - I don't feel very well
     - I am disappointed
@@ -83,6 +101,8 @@ nlu:
     - are you a human?加
     - am I talking to a bot?
     - am I talking to a human?
+    - 你是谁
+    - 你是机器人么
 - intent: explain_sql
   examples: |
     - 解释解释[update tab set b=c](sql)
@@ -107,6 +127,13 @@ nlu:
     - 有哪些表
     - 几张表
     - 几个表呢
+- intent: show_conn
+  examples: |
+    - show conn
+    - show connections
+    - 连接情况呢
+    - 有几个连接
+    - 连接怎么样
 - intent: show_processlist
   examples: |
     - show processlist
@@ -118,6 +145,11 @@ nlu:
     - how do you do
     - 啥状态啊你
     - 状态怎么样
+- intent: show_cluster_status
+    - 集群怎么样了
+    - 集群咋样
+    - 集群挂了吗
+    - 集群
 - intent: run_sql
   examples: |
     - [select 1](sql) 看看

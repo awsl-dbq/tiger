@@ -33,28 +33,29 @@ intents:
     use_entities: true
 - run_sql:
     use_entities: true
+- show_conn:
+    use_entities: true
 entities:
 - sql
-slots:
-  sql:
-    type: rasa.shared.core.slots.TextSlot
-    initial_value: null
-    auto_fill: true
-    influence_conversation: true
+
 responses:
   utter_greet:
   - text: Hey! How are you? Welcome to Tiger.
   utter_cheer_up:
-  - image: https://i.imgur.com/nGF1K8f.jpg
+  - image: https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fqqpublic.qpic.cn%2Fqq_public%2F0%2F0-2635007480-F52A48DB487A1012056FF7165D4B9B9A%2F0%3Ffmt%3Dgif%26size%3D3406%26h%3D596%26w%3D432%26ppv%3D1.jpg&refer=http%3A%2F%2Fqqpublic.qpic.cn&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=jpeg?sec=1643895100&t=d5f6fcd7450ca5cefc5092337d292ce7
     text: 'Here is something to cheer you up:'
   utter_did_that_help:
   - text: Did that help you?
+  - text: 有没有帮到你
   utter_happy:
   - text: Great, carry on!
+  - text: 加油,老铁!
   utter_goodbye:
   - text: Bye
+  - text: 再见了您
   utter_iamabot:
   - text: I am a bot, powered by Rasa.
+  - text: 我是个无情的机器人
   utter_do_explain:
   - text: 'i do explain for you ${sql}'
   utter_show_databases:
@@ -68,5 +69,6 @@ actions:
 - action_show_processlist
 - action_do_explain
 - action_run_sql
+- action_show_connection
 forms: {}
 e2e_actions: []
