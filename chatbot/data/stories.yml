@@ -65,3 +65,9 @@ stories:
   steps:
   - intent: get_started
   - action: utter_get_started
+
+
+- story: show conne path
+  steps:
+  - intent: show_conn
+  - action: action_show_connection
