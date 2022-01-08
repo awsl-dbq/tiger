@@ -1,4 +1,5 @@
-package   wo.le.ge.ca.ca.ca;
+package   Hello.Pingcap.Hackathon2021;
+println("Hello Hackathon 2021!");
 let map = fn(arr, f) {
     let iter = fn(arr, acc) {
         if (len(arr) == 0) {

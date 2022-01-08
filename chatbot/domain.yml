@@ -41,6 +41,9 @@ entities:
 responses:
   utter_greet:
   - text: Hey! How are you? Welcome to Tiger.
+  - text: 来啦,老铁
+  - text: 欢迎来到黑阔马拉松!
+  - text: 哈,泰迪币 Hackathon欢迎您!
   utter_cheer_up:
   - image: https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fqqpublic.qpic.cn%2Fqq_public%2F0%2F0-2635007480-F52A48DB487A1012056FF7165D4B9B9A%2F0%3Ffmt%3Dgif%26size%3D3406%26h%3D596%26w%3D432%26ppv%3D1.jpg&refer=http%3A%2F%2Fqqpublic.qpic.cn&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=jpeg?sec=1643895100&t=d5f6fcd7450ca5cefc5092337d292ce7
     text: 'Here is something to cheer you up:'

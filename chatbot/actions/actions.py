@@ -27,7 +27,17 @@ def randomPickGifUrl():
         "https://n.sinaimg.cn/tech/transform/340/w162h178/20210629/aed8-krwipar9961537.gif",
         "https://n.sinaimg.cn/tech/transform/279/w136h143/20210629/bb5f-krwipar9958933.gif",
         "https://n.sinaimg.cn/tech/transform/298/w183h115/20210629/a5e5-krwipar9952310.gif",
-        "https://n.sinaimg.cn/tech/transform/396/w207h189/20220105/b668-ddc78350ce0f1db6275482c24490768f.gif"
+        "https://n.sinaimg.cn/tech/transform/396/w207h189/20220105/b668-ddc78350ce0f1db6275482c24490768f.gif",
+        "http://localhost:9090/1.png",
+        "http://localhost:9090/2.png",
+        "http://localhost:9090/3.png",
+        "http://localhost:9090/4.png",
+        "http://localhost:9090/5.png",
+        "http://localhost:9090/6.png",
+        "http://localhost:9090/7.png",
+        "http://localhost:9090/8.png",
+        "http://localhost:9090/9.png",
+        "http://localhost:9090/10.png",
     ]
     idx = math.floor(random.random()*10000) % len(seed)
     return seed[idx]
@@ -136,7 +146,7 @@ class ShowConnection(Action):
     def run(self,dispatcher: CollectingDispatcher,tracker: Tracker,
         domain: Dict[Text,Any]
     ) -> List[Dict[Text,Any]]:
-        cmd = "select * from METRICS_SCHEMA.tidb_connection_count;"
-        rep = run_sql(cmd)
+        cmd = "select max(value) from METRICS_SCHEMA.tidb_connection_count;"
+        rep = run_sql(cmd).lower().split("\n")[1] + "个哦"
         dispatcher.utter_message(text=rep)
         randomPickGif(dispatcher)

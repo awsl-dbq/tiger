@@ -146,6 +146,7 @@ nlu:
     - 啥状态啊你
     - 状态怎么样
 - intent: show_cluster_status
+  examples: |
     - 集群怎么样了
     - 集群咋样
     - 集群挂了吗
