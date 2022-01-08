@@ -1,0 +1,31 @@
+@startuml
+!include <C4/C4_Container>
+!include <C4/C4_Context>
+LAYOUT_LEFT_RIGHT()
+System_Boundary(lang,"语言"){
+
+    Container(nature,"自然语言","模糊/汉语","0"){
+       
+    }
+    
+    Container(code,"机器语言","精确/SQL","1"){
+        
+    }
+    nature <--> code: 森沟道
+}
+Rel_U(hack,lang,"实现")
+
+
+
+System_Boundary(hack,"∞ TiDB  Hackathon 2021"){
+    Container(chat,"Chatbot","Chatbot"){
+       
+    }
+    Container(tiscript,"TiScript","TiScript"){
+       
+    }
+    chat <--> tiscript: Tiger
+
+}
+
+@enduml

@@ -26,6 +26,8 @@ def randomPickGifUrl():
     seed = [
         "https://n.sinaimg.cn/tech/transform/340/w162h178/20210629/aed8-krwipar9961537.gif",
         "https://n.sinaimg.cn/tech/transform/279/w136h143/20210629/bb5f-krwipar9958933.gif",
+        "https://n.sinaimg.cn/tech/transform/298/w183h115/20210629/a5e5-krwipar9952310.gif",
+        "https://n.sinaimg.cn/tech/transform/396/w207h189/20220105/b668-ddc78350ce0f1db6275482c24490768f.gif"
     ]
     idx = math.floor(random.random()*10000) % len(seed)
     return seed[idx]
