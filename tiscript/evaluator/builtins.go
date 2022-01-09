@@ -2,6 +2,7 @@ package evaluator
 
 import (
 	"fmt"
+	"os/exec"
 
 	"github.com/awsl-dbq/tiger/tiscript/object"
 )
@@ -104,6 +105,26 @@ var builtins = map[string]*object.Builtin{
 				s := fmt.Sprintf("%v", arg.Inspect())
 				fmt.Print(s)
 				newElements = append(newElements, &object.String{Value: s})
+			}
+			fmt.Println()
+			return &object.Array{Elements: newElements}
+		},
+	},
+	"tidb": &object.Builtin{
+		Fn: func(args ...object.Object) object.Object {
+			newElements := []object.Object{}
+
+			for _, arg := range args {
+				s := fmt.Sprintf("%v", arg.Inspect())
+				fmt.Print(s)
+				cmd := exec.Command("mysql", "--comments", "--host", "127.0.0.1", "--port", "4000", "-u", "root", "mysql", "-e", s)
+				fmt.Println(cmd)
+				b, err := cmd.CombinedOutput()
+				if err != nil {
+					fmt.Println(err)
+				}
+				fmt.Println(string(b))
+				newElements = append(newElements, &object.String{Value: string(b)})
 			}
 			fmt.Println()
 			return &object.Array{Elements: newElements}

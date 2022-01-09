@@ -1,0 +1,23 @@
+package   Hello.Pingcap.Hackathon2021;
+let sqls = ["show databases",
+"create database tiger",
+"create table mysql.tiger(msg varchar(500))",
+"insert into mysql.tiger(msg) values ('Hello Tiger,This is TiScript')"
+ ];
+
+let map = fn(arr, f) {
+    let iter = fn(arr, acc) {
+        if (len(arr) == 0) {
+            acc
+        }else {
+            iter(rest(arr), push(acc, f(first(arr))));
+        }
+    };
+    iter(arr, []);
+};
+
+
+map(sqls,println)
+
+
+map(sqls,tidb)
